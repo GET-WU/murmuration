@@ -101,6 +101,7 @@ let flockCenterY = 0;
 let flockCenterZ = 0;
 let perched = true;
 let returning = false;
+let launchTime = 0;
 let returnTimer = 0;
 let maskPositions = [];
 let maskCenter = { x: 0, y: 0 };
@@ -216,6 +217,7 @@ function returnToTree() {
 function launchFromTree() {
   if (!perched) return;
   perched = false;
+  launchTime = performance.now();
   const cx = maskCenter.x;
   const cy = maskCenter.y;
   for (let i = 0; i < boids.length; i++) {
@@ -238,6 +240,13 @@ canvas.addEventListener('click', (e) => {
   canvas.style.cursor = 'none';
   renderer.resetTrail(e.clientX - rect.left, e.clientY - rect.top);
   launchFromTree();
+});
+
+canvas.addEventListener('dblclick', () => {
+  if (perched || returning) return;
+  if (performance.now() - launchTime < 2000) return;
+  audio.fadeOut(3000);
+  returnToTree();
 });
 
 function updateFlock(dt) {
