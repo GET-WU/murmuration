@@ -1,0 +1,13 @@
+snapshots/
+素材/*.mp4
+素材/*.wav
+素材/*.m4a
+素材/*.jpg
+!素材/087dde6f4a36d229db50995b8f37c335.jpg
+素材/*.bak
+bird-compare.html
+loop-test.html
+ripple-compare.html
+trail-compare.html
+audio/loop.m4a
+.DS_Store
